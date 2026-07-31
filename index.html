@@ -1,179 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>For You ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Girlfriend Day ❤️</title>
 
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-        }
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    font-family:Arial,sans-serif;
+}
 
-        .card {
-            background: rgba(255,255,255,0.95);
-            padding: 40px;
-            border-radius: 25px;
-            text-align: center;
-            width: 340px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            position: relative;
-            z-index: 2;
-        }
+.card{
+    background:white;
+    width:400px;
+    max-width:90%;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 0 20px rgba(0,0,0,.2);
+}
 
-        h1 {
-            color: #ff2e63;
-        }
+h1{
+    color:#ff2e63;
+}
 
-        button {
-            padding: 10px 20px;
-            margin-top: 15px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            background: #ff2e63;
-            color: white;
-        }
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    background:#ff2e63;
+    color:white;
+    cursor:pointer;
+    margin-top:15px;
+}
 
-        #yes {
-            background: #ff2e63;
-        }
+button:hover{
+    opacity:0.9;
+}
 
-        #no {
-            background: #444;
-        }
+.hidden{
+    display:none;
+}
 
-        #result {
-            margin-top: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            min-height: 40px;
-        }
-
-        /* floating hearts */
-        .floating {
-            position: absolute;
-            font-size: 24px;
-            animation: floatUp linear infinite;
-            opacity: 0.8;
-            z-index: 0;
-        }
-
-        @keyframes floatUp {
-            from {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 1;
-            }
-
-            to {
-                transform: translateY(-10vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        .hidden {
-            display: none;
-        }
-    </style>
+#message{
+    margin-top:20px;
+    line-height:1.6;
+}
+</style>
 </head>
-
 <body>
 
-    <div class="card">
+<div class="card">
 
-        <!-- STEP 1 -->
-        <div id="step1">
-            <h1 id="text1"></h1>
-            <button id="next1" class="hidden">Continue →</button>
-        </div>
-
-        <!-- STEP 2 -->
-        <div id="step2" class="hidden">
-            <h1 id="text2"></h1>
-
-            <button id="yes">Yes 💖</button>
-            <button id="no">No 💔</button>
-
-            <div id="result"></div>
-        </div>
-
+    <div id="page1">
+        <h1>Happy Girlfriend Day ❤️</h1>
+        <p>For Someone Very Special...</p>
+        <button onclick="openHeart()">Open My Heart ❤️</button>
     </div>
 
-    <script>
+    <div id="page2" class="hidden">
+        <h1>Dear Rinosia ❤️</h1>
 
-        // 🌹 floating hearts/roses
-        function createFloating() {
-            const el = document.createElement("div");
+        <p>
+            You make my days brighter and my heart happier.
+            Thank you for being such an amazing person.
+        </p>
 
-            const items = ["❤️", "🌹", "💖", "💕"];
-            el.innerHTML = items[Math.floor(Math.random() * items.length)];
+        <button onclick="showSecret()">
+            Tap For A Secret 💌
+        </button>
 
-            el.classList.add("floating");
+        <div id="message"></div>
+    </div>
 
-            el.style.left = Math.random() * 100 + "vw";
-            el.style.fontSize = (Math.random() * 20 + 15) + "px";
-            el.style.animationDuration = (Math.random() * 5 + 4) + "s";
+</div>
 
-            document.body.appendChild(el);
+<script>
 
-            setTimeout(() => el.remove(), 8000);
-        }
-        setInterval(createFloating, 250);
+function openHeart(){
+    document.getElementById("page1").classList.add("hidden");
+    document.getElementById("page2").classList.remove("hidden");
+}
 
-        // 💬 typing function
-        function typeText(element, text, speed, callback) {
-            let i = 0;
-            function typing() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typing, speed);
-                } else if (callback) {
-                    callback();
-                }
-            }
-            typing();
-        }
+function showSecret(){
 
-        // STEP 1 typing
-        const text1 = document.getElementById("text1");
+    document.getElementById("message").innerHTML =
 
-        typeText(text1, "I miss you ❤️", 80, () => {
-            document.getElementById("next1").classList.remove("hidden");
-        });
+    "<br><b>💌 Secret Message 💌</b><br><br>" +
 
-        // go to step 2
-        document.getElementById("next1").onclick = function () {
-            document.getElementById("step1").classList.add("hidden");
-            document.getElementById("step2").classList.remove("hidden");
+    "Happy Girlfriend Day, Rinosia ❤️<br><br>" +
 
-            const text2 = document.getElementById("text2");
+    "Thank you for every smile, every laugh, and every moment we share together. 🌹<br><br>" +
 
-            typeText(text2, "Do you miss me too? ❤️", 80);
-        };
+    "You are beautiful, special, and deeply appreciated. ❤️<br><br>" +
 
-        // 💖 YES
-        document.getElementById("yes").onclick = function () {
-            document.getElementById("result").innerHTML =
-                "That actually made me really happy ❤️<br>" +
-                "I’ve been thinking about you a lot 🙂";
-        };
+    "Whenever I think of you, I find another reason to smile. 🥰<br><br>" +
 
-        // 💔 NO
-        document.getElementById("no").onclick = function () {
-            document.getElementById("result").innerHTML =
-                "It’s okay 🙂<br>" +
-                "I’ll still miss you anyway ❤️";
-        };
+    "<button onclick='finalSurprise()'>🎁 Final Surprise ❤️</button>";
+}
 
-    </script>
+function finalSurprise(){
+
+    document.getElementById("message").innerHTML +=
+
+    "<br><br><hr><br>" +
+
+    "<h2>❤️ Rinosia ❤️</h2>" +
+
+    "If I could choose one person to make smile every day, it would always be you. 🌹<br><br>" +
+
+    "Happy Girlfriend Day, Beautiful. ❤️✨";
+}
+
+</script>
 
 </body>
 </html>
