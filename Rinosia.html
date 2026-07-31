@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>For You ❤️</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        }
+
+        .card {
+            background: rgba(255,255,255,0.95);
+            padding: 40px;
+            border-radius: 25px;
+            text-align: center;
+            width: 340px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            color: #ff2e63;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            background: #ff2e63;
+            color: white;
+        }
+
+        #yes {
+            background: #ff2e63;
+        }
+
+        #no {
+            background: #444;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 40px;
+        }
+
+        /* floating hearts */
+        .floating {
+            position: absolute;
+            font-size: 24px;
+            animation: floatUp linear infinite;
+            opacity: 0.8;
+            z-index: 0;
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <!-- STEP 1 -->
+        <div id="step1">
+            <h1 id="text1"></h1>
+            <button id="next1" class="hidden">Continue →</button>
+        </div>
+
+        <!-- STEP 2 -->
+        <div id="step2" class="hidden">
+            <h1 id="text2"></h1>
+
+            <button id="yes">Yes 💖</button>
+            <button id="no">No 💔</button>
+
+            <div id="result"></div>
+        </div>
+
+    </div>
+
+    <script>
+
+        // 🌹 floating hearts/roses
+        function createFloating() {
+            const el = document.createElement("div");
+
+            const items = ["❤️", "🌹", "💖", "💕"];
+            el.innerHTML = items[Math.floor(Math.random() * items.length)];
+
+            el.classList.add("floating");
+
+            el.style.left = Math.random() * 100 + "vw";
+            el.style.fontSize = (Math.random() * 20 + 15) + "px";
+            el.style.animationDuration = (Math.random() * 5 + 4) + "s";
+
+            document.body.appendChild(el);
+
+            setTimeout(() => el.remove(), 8000);
+        }
+        setInterval(createFloating, 250);
+
+        // 💬 typing function
+        function typeText(element, text, speed, callback) {
+            let i = 0;
+            function typing() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                } else if (callback) {
+                    callback();
+                }
+            }
+            typing();
+        }
+
+        // STEP 1 typing
+        const text1 = document.getElementById("text1");
+
+        typeText(text1, "I miss you ❤️", 80, () => {
+            document.getElementById("next1").classList.remove("hidden");
+        });
+
+        // go to step 2
+        document.getElementById("next1").onclick = function () {
+            document.getElementById("step1").classList.add("hidden");
+            document.getElementById("step2").classList.remove("hidden");
+
+            const text2 = document.getElementById("text2");
+
+            typeText(text2, "Do you miss me too? ❤️", 80);
+        };
+
+        // 💖 YES
+        document.getElementById("yes").onclick = function () {
+            document.getElementById("result").innerHTML =
+                "That actually made me really happy ❤️<br>" +
+                "I’ve been thinking about you a lot 🙂";
+        };
+
+        // 💔 NO
+        document.getElementById("no").onclick = function () {
+            document.getElementById("result").innerHTML =
+                "It’s okay 🙂<br>" +
+                "I’ll still miss you anyway ❤️";
+        };
+
+    </script>
+
+</body>
+</html>
